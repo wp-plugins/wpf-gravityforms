@@ -11,6 +11,10 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( class_exists( 'GFForms' ) ) {
 
     GFForms::include_addon_framework();
@@ -346,7 +350,7 @@ if ( class_exists( 'GFForms' ) ) {
 					$entry_id       = $response->metadata->order_id;
 					$transaction_id = $response->id;
 					$payment_status = 'Paid';
-					$note           = sprintf( __( 'Payment completed: %s.', 'gravityforms' ), $transaction_id );
+					$note           = sprintf( __( 'Payment completed: %s.', 'wpf-gravityforms' ), $transaction_id );
 
 					GFFormsModel::add_note( $entry_id, 0, 'wpFortify', $note, 'success' );
 					GFAPI::update_entry_property( $entry_id, 'payment_status', $payment_status );
