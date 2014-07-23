@@ -1,10 +1,10 @@
-=== wpFortify for Gravity Forms ===
+﻿=== wpFortify for Gravity Forms ===
 Contributors: rossdev
 Tags: stripe, payment, payments, credit cards, online payment, forms, gravity forms
 Donate link: https://wpfortify.com
 Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -80,8 +80,18 @@ Sorry we currently don't support subscriptions, but it's on the short list to ad
 4. wpFortify default checkout page
 
 == Changelog ==
+= 0.2.0 =
+* Feature: Added new custom checkout text for title.
+* Feature: Added new custom checkout text for description.
+* Feature: Added new custom checkout text for payment button.
+* Fix: $iv warning in unmask function.
+* Tweak: Changed identifiers for translate strings.
+* Tweak: Changed callback url.
+
 = 0.1.0 =
 * Initial release.
 
 == Upgrade Notice ==
-Initial release
+
+= 0.2.0 =
+The method for displaying text on the checkout screen has changed. After update please review the checkout settings.

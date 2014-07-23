@@ -3,7 +3,7 @@
 Plugin Name: wpFortify for Gravity Forms
 Plugin URI: http://wordpress.org/plugins/wpf-gravityforms/
 Description: wpFortify provides a hosted SSL checkout page for Stripe payments. A free wpFortify account is required for this plugin to work.
-Version: 0.1.0
+Version: 0.2.0
 Author: wpFortify
 Author URI: https://wpfortify.com
 License: GNU General Public License v3.0
@@ -21,7 +21,7 @@ if ( class_exists( 'GFForms' ) ) {
 
     class WPF_GF extends GFAddOn {
 
-        protected $_version = '0.1.0';
+        protected $_version = '0.2.0';
         protected $_min_gravityforms_version = '1.8.9';
         protected $_slug = 'wpf-gravityforms';
         protected $_full_path = __FILE__;
@@ -43,8 +43,8 @@ if ( class_exists( 'GFForms' ) ) {
 			parent::init_admin();
 			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 
-		}		 
-		 
+		}
+
 		public function init_frontend(){
 
 			parent::init_frontend();
@@ -57,15 +57,15 @@ if ( class_exists( 'GFForms' ) ) {
 		 * Add setting link to plugins page
 		 */
 		public function plugin_action_links( $links ) {
-			
+
 			$plugin_links = array(
-				'<a href="' . admin_url( 'admin.php?page=gf_settings&subview=wpFortify+%28Stripe%29' ) . '">' . __( 'Settings', 'wpf-gravityforms' ) . '</a>'
+				'<a href="' . admin_url( 'admin.php?page=gf_settings&subview=wpFortify+%28Stripe%29' ) . '">' . __( 'Settings', $this->_slug ) . '</a>'
 			);
-			
+
 			return array_merge( $plugin_links, $links );
-		
-		}		
-		
+
+		}
+
 		/**
 		 * Plugin Settings.
 		 */
@@ -74,21 +74,21 @@ if ( class_exists( 'GFForms' ) ) {
 			return array(
 
 				array(
-                    'title'  => __( 'wpFortify', 'wpf-gravityforms' ),
+                    'title'  => __( 'wpFortify', $this->_slug ),
                     'fields' => array(
 						array(
-							'label'    => __( 'Secret Key', 'wpf-gravityforms' ),
+							'label'    => __( 'Secret Key', $this->_slug ),
 							'type'     => 'text',
 							'name'     => 'wpf_secret_key',
-							'tooltip'  => __( 'Enter the access keys from your wpFortify account.', 'wpf-gravityforms' ),
+							'tooltip'  => __( 'Enter the access keys from your wpFortify account.', $this->_slug ),
 							'class'    => 'medium',
 							'required' => true
 						),
 						array(
-							'label'    => __( 'Public Key', 'wpf-gravityforms' ),
+							'label'    => __( 'Public Key', $this->_slug ),
 							'type'     => 'text',
 							'name'     => 'wpf_public_key',
-							'tooltip'  => __( 'Enter the access keys from your wpFortify account.', 'wpf-gravityforms' ),
+							'tooltip'  => __( 'Enter the access keys from your wpFortify account.', $this->_slug ),
 							'class'    => 'medium',
 							'required' => true
 						)
@@ -112,7 +112,7 @@ if ( class_exists( 'GFForms' ) ) {
 					'title' => 'General Settings',
 					'fields' => array(
 						array(
-							'label'   => __( 'Enable/Disable', 'wpf-gravityforms' ),
+							'label'   => __( 'Enable/Disable', $this->_slug ),
 							'type'    => 'checkbox',
 							'name'    => 'enable',
 							'choices' => array(
@@ -124,12 +124,12 @@ if ( class_exists( 'GFForms' ) ) {
 						),
 						array(
 							'name'     => 'transaction_type',
-							'label'    => __( 'Transaction Type', 'wpf-gravityforms' ),
+							'label'    => __( 'Transaction Type', $this->_slug ),
 							'type'     => 'select',
 							'onchange' => "jQuery(this).parents('form').submit();",
 							'choices'  => array(
-								array( 'label' => __( 'Select a transaction type', 'wpf-gravityforms' ), 'value' => '' ),
-								array( 'label' => __( 'Basic', 'wpf-gravityforms' ), 'value' => 'basic' )
+								array( 'label' => __( 'Select a transaction type', $this->_slug ), 'value' => '' ),
+								array( 'label' => __( 'Basic', $this->_slug ), 'value' => 'basic' )
 							)
 						)
 					)
@@ -144,14 +144,14 @@ if ( class_exists( 'GFForms' ) ) {
 					'fields' => array(
 						array(
 							'name'          => 'email',
-							'label'         => __( 'Email', 'wpf-gravityforms' ),
+							'label'         => __( 'Email', $this->_slug ),
 							'type'          => 'select',
 							'choices'       => $this->get_field_map_choices( $form['id'] ),
 							'required'      => true
 						),
 						array(
 							'name'          => 'paymentAmount',
-							'label'         => __( 'Payment Amount', 'wpf-gravityforms' ),
+							'label'         => __( 'Payment Amount', $this->_slug ),
 							'type'          => 'select',
 							'choices'       => $this->get_field_map_choices( $form['id'] ),
 							'required'      => true,
@@ -168,10 +168,10 @@ if ( class_exists( 'GFForms' ) ) {
 					),
 					'fields' => array(
 						array(
-							'label'   => __( 'Test mode', 'wpf-gravityforms' ),
+							'label'   => __( 'Test mode', $this->_slug ),
 							'type'    => 'checkbox',
 							'name'    => 'testmode',
-							'tooltip' => __( 'Place the payment gateway in test mode.', 'wpf-gravityforms' ),
+							'tooltip' => __( 'Place the payment gateway in test mode.', $this->_slug ),
 							'choices' => array(
 								array(
 									'label' => 'Enable Test Mode',
@@ -181,11 +181,11 @@ if ( class_exists( 'GFForms' ) ) {
 						),
 						array(
                             'name'     => 'currency',
-							'label'    => __( 'Currency', 'wpf-gravityforms' ),
+							'label'    => __( 'Currency', $this->_slug ),
                             'type'     => 'select',
 							'required' => true,
                             'choices'  => array(
-								array( 'label' => __( 'Please select a currency', 'wpf-gravityforms' ), 'value' => '' ),
+								array( 'label' => __( 'Please select a currency', $this->_slug ), 'value' => '' ),
 								array( 'label' => 'USD', 'value' => 'usd' ),
 								array( 'label' => 'CAD', 'value' => 'cad' ),
 								array( 'label' => 'GBP', 'value' => 'gbp' ),
@@ -204,39 +204,53 @@ if ( class_exists( 'GFForms' ) ) {
 					),
 					'fields' => array(
 						array(
-							'name'  => 'custom_checkout',
-							'label' => __( 'Custom Checkout', 'wpf-gravityforms' ),
-							'tooltip' => __( 'Optional: Enter the URL to your custom checkout page. Example: <code>https://example.wpfortify.com/</code>', 'wpf-gravityforms' ),
-							'type'  => 'text',
-							'class' => 'medium'
+							'name'    => 'custom_checkout',
+							'label'   => __( 'Custom Checkout', $this->_slug ),
+							'tooltip' => __( 'Optional: Enter the URL to your custom checkout page. Example: <code>https://example.wpfortify.com/</code>', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
 						),
 						array(
-							'name'  => 'image_url',
-							'label' => __( 'Custom Image', 'wpf-gravityforms' ),
-							'tooltip' => __( 'Optional: Enter the URL to the secure image from your wpFortify account. Example: <code>https://wpfortify.com/media/example.png</code>', 'wpf-gravityforms' ),
-							'type'  => 'text',
-							'class' => 'medium'
+							'name'    => 'image_url',
+							'label'   => __( 'Custom Image', $this->_slug ),
+							'tooltip' => __( 'Optional: Enter the URL to the secure image from your wpFortify account. Example: <code>https://wpfortify.com/media/example.png</code>', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
 						),
 						array(
-							'name'  => 'description',
-							'label' => __( 'Description', 'wpf-gravityforms' ),
-							'tooltip' => __( 'Optional: Default is "Order #123"', 'wpf-gravityforms' ),
-							'type'  => 'text',
-							'class' => 'medium'
+							'name'    => 'site_title',
+							'label'   => __( 'Checkout Title', $this->_slug ),
+							'tooltip' => __( 'Optional: Enter a new title. Default is "', $this->_slug ) . get_bloginfo() . '".',
+							'type'    => 'text',
+							'class'   => 'medium'
 						),
 						array(
-							'name'  => 'return_url',
-							'label' => __( 'Return URL', 'wpf-gravityforms' ),
-							'tooltip' => __( 'Optional: Default is the site URL', 'wpf-gravityforms' ),
-							'type'  => 'text',
-							'class' => 'medium'
+							'name'    => 'description',
+							'label'   => __( 'Checkout Description', $this->_slug ),
+							'tooltip' => __( 'Optional: Enter a new description. Default is "Order #123 ($456)". Available filters: <code>{{order_id}} {{order_amount}}</code>. Example: <code>Order #{{order_id}} (${{order_amount}}</code>', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
 						),
 						array(
-							'name'  => 'cancel_url',
-							'label' => __( 'Cancel URL', 'wpf-gravityforms' ),
-							'tooltip' => __( 'Optional: Default is the site URL', 'wpf-gravityforms' ),
-							'type'  => 'text',
-							'class' => 'medium'
+							'name'    => 'button',
+							'label'   => __( 'Checkout Button', $this->_slug ),
+							'tooltip' => __( 'Optional: Enter new button text. Default is "Pay with Card". Available filters: <code>{{order_id}} {{order_amount}}</code>. Example: <code>Pay with Card (${{order_amount}})</code>', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
+						),
+						array(
+							'name'    => 'return_url',
+							'label'   => __( 'Return URL', $this->_slug ),
+							'tooltip' => __( 'Optional: Default is the site URL', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
+						),
+						array(
+							'name'    => 'cancel_url',
+							'label'   => __( 'Cancel URL', $this->_slug ),
+							'tooltip' => __( 'Optional: Default is the site URL', $this->_slug ),
+							'type'    => 'text',
+							'class'   => 'medium'
 						),
 					)
 				)
@@ -258,7 +272,9 @@ if ( class_exists( 'GFForms' ) ) {
 				$site_url    = get_bloginfo( 'url' );
 				$return_url  = $order['return_url'];
 				$cancel_url  = $order['cancel_url'];
-				$description = $order['description'];
+				$site_title  = get_bloginfo();
+				$description = sprintf( '%s %s ($%s)', __( 'Order #', $this->_slug ), $lead['id'], $lead[$order['paymentAmount']] );
+				$button      = __( 'Pay with Card', $this->_slug );
 
 				if ( !$return_url ){
 
@@ -272,20 +288,32 @@ if ( class_exists( 'GFForms' ) ) {
 
 				}
 
-				if ( !$description ){
+				if ( $order['site_title'] ) {
 
-					$description = sprintf( 'Order #%s', $lead['id'] );
+					$site_title = $order['site_title'];
+
+				}
+
+				if ( $order['description'] ) {
+
+					$description = str_replace( array( '{{order_id}}', '{{order_amount}}' ), array( $lead['id'], $lead[$order['paymentAmount']] ), $order['description'] );
+
+				}
+
+				if ( $order['button'] ) {
+
+					$button = str_replace( array( '{{order_id}}', '{{order_amount}}' ), array( $lead['id'], $lead[$order['paymentAmount']] ), $order['button'] );
 
 				}
 
 				// Data for wpFortify
 				$wpf_charge = array (
 					'wpf_charge' => array(
-						'plugin'       => 'wpf-gravityforms',
+						'plugin'       => $this->_slug,
 						'action'       => 'charge_card',
-						'site_title'   => get_bloginfo(),
+						'site_title'   => $site_title,
 						'site_url'     => $site_url,
-						'listen_url'   => $site_url . '/?wpfortify=listen',
+						'listen_url'   => $site_url . '/?' . $this->_slug . '=callback',
 						'return_url'   => $return_url,
 						'cancel_url'   => $cancel_url,
 						'image_url'    => $order['image_url'],
@@ -294,6 +322,7 @@ if ( class_exists( 'GFForms' ) ) {
 						'email'        => $lead[$order['email']],
 						'amount'       => $lead[$order['paymentAmount']],
 						'description'  => $description,
+						'button'       => $button,
 						'currency'     => $order['currency'],
 						'testmode'     => $testmode,
 						'capture'      => true,
@@ -341,7 +370,7 @@ if ( class_exists( 'GFForms' ) ) {
 		 */
         public function wpf_callback() {
 
-			if ( isset( $_GET['wpfortify'] ) && $_GET['wpfortify'] == 'listen' ) {
+			if ( isset( $_GET[ $this->_slug ] ) && $_GET[ $this->_slug ] == 'callback' ) {
 
 				$response = $this->wpf_unmask( file_get_contents( 'php://input' ) );
 
@@ -350,7 +379,7 @@ if ( class_exists( 'GFForms' ) ) {
 					$entry_id       = $response->metadata->order_id;
 					$transaction_id = $response->id;
 					$payment_status = 'Paid';
-					$note           = sprintf( __( 'Payment completed: %s.', 'wpf-gravityforms' ), $transaction_id );
+					$note           = sprintf( __( 'Payment completed: %s.', $this->_slug ), $transaction_id );
 
 					GFFormsModel::add_note( $entry_id, 0, 'wpFortify', $note, 'success' );
 					GFAPI::update_entry_property( $entry_id, 'payment_status', $payment_status );
@@ -380,13 +409,13 @@ if ( class_exists( 'GFForms' ) ) {
 
 			if ( is_wp_error( $wpf_api ) ) {
 
-				return new WP_Error( 'wpfortify_error', __( 'There was a problem connecting to the payment gateway, please try again.', 'wpf-gravityforms' ) );
+				return new WP_Error( 'wpfortify_error', __( 'There was a problem connecting to the payment gateway, please try again.', $this->_slug ) );
 
 			}
 
 			if ( empty( $wpf_api['body'] ) ) {
 
-				return new WP_Error( 'wpfortify_error', __( 'Empty response.', 'wpf-gravityforms' ) );
+				return new WP_Error( 'wpfortify_error', __( 'Empty response.', $this->_slug ) );
 
 			}
 
@@ -398,7 +427,7 @@ if ( class_exists( 'GFForms' ) ) {
 
 			} elseif ( empty( $response ) ) {
 
-				return new WP_Error( 'wpfortify_error', __( 'Invalid response.', 'wpf-gravityforms' ) );
+				return new WP_Error( 'wpfortify_error', __( 'Invalid response.', $this->_slug ) );
 
 			} else {
 
@@ -427,13 +456,18 @@ if ( class_exists( 'GFForms' ) ) {
 		function wpf_unmask( $data ) {
 
 			list( $iv, $data_decoded ) = array_map( 'base64_decode', explode( '-', base64_decode( $data ), 2 ) );
-			$unmask = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_128, md5( $this->get_plugin_setting( 'wpf_secret_key' ) ), $data_decoded, MCRYPT_MODE_CBC, $iv ), "\0\4" );
-			$hash = substr( $unmask, -32 );
-			$unmask = substr( $unmask, 0, -32 );
 
-			if ( md5( $unmask ) == $hash ) {
+			if ( $iv && $data_decoded ) {
 
-				return json_decode( $unmask );
+				$unmask = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_128, md5( $this->get_plugin_setting( 'wpf_secret_key' ) ), $data_decoded, MCRYPT_MODE_CBC, $iv ), "\0\4" );
+				$hash = substr( $unmask, -32 );
+				$unmask = substr( $unmask, 0, -32 );
+
+				if ( md5( $unmask ) == $hash ) {
+
+					return json_decode( $unmask );
+
+				}
 
 			}
 
