@@ -3,7 +3,7 @@
 Plugin Name: wpFortify for Gravity Forms
 Plugin URI: http://wordpress.org/plugins/wpf-gravityforms/
 Description: wpFortify provides a hosted SSL checkout page for Stripe payments. A free wpFortify account is required for this plugin to work.
-Version: 0.2.0
+Version: 0.2.1
 Author: wpFortify
 Author URI: https://wpfortify.com
 License: GNU General Public License v3.0
@@ -21,7 +21,7 @@ if ( class_exists( 'GFForms' ) ) {
 
     class WPF_GF extends GFAddOn {
 
-        protected $_version = '0.2.0';
+        protected $_version = '0.2.1';
         protected $_min_gravityforms_version = '1.8.9';
         protected $_slug = 'wpf-gravityforms';
         protected $_full_path = __FILE__;
@@ -153,9 +153,9 @@ if ( class_exists( 'GFForms' ) ) {
 							'name'          => 'paymentAmount',
 							'label'         => __( 'Payment Amount', $this->_slug ),
 							'type'          => 'select',
+							'tooltip'       => __( 'Please make sure to use a "Total" field.', $this->_slug ),
 							'choices'       => $this->get_field_map_choices( $form['id'] ),
-							'required'      => true,
-							'default_value' => 'form_total'
+							'required'      => true
 						),
 					)
 				),
@@ -187,10 +187,11 @@ if ( class_exists( 'GFForms' ) ) {
                             'choices'  => array(
 								array( 'label' => __( 'Please select a currency', $this->_slug ), 'value' => '' ),
 								array( 'label' => 'USD', 'value' => 'usd' ),
-								array( 'label' => 'CAD', 'value' => 'cad' ),
-								array( 'label' => 'GBP', 'value' => 'gbp' ),
-								array( 'label' => 'EUR', 'value' => 'eur' ),
-								array( 'label' => 'ASD', 'value' => 'asd' ),
+	                            array( 'label' => 'AUD', 'value' => 'aud' ),
+	                            array( 'label' => 'CAD', 'value' => 'cad' ),
+	                            array( 'label' => 'EUR', 'value' => 'eur' ),
+	                            array( 'label' => 'GBP', 'value' => 'gbp' ),
+	                            array( 'label' => 'SEK', 'value' => 'sek' ),
 							)
                         ),
 					)

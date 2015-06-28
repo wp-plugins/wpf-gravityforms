@@ -3,8 +3,8 @@ Contributors: rossdev
 Tags: stripe, payment, payments, credit cards, online payment, forms, gravity forms
 Donate link: https://wpfortify.com
 Requires at least: 3.9
-Tested up to: 4.1
-Stable tag: 0.2.0
+Tested up to: 4.2.2
+Stable tag: 0.2.1
 License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,10 @@ Sorry we currently don't support subscriptions, but it's on the short list to ad
 4. wpFortify default checkout page
 
 == Changelog ==
+= 0.2.1 =
+* Added currency SEK.
+* Changed currency ASD to AUD.
+
 = 0.2.0 =
 * Feature: Added new custom checkout text for title.
 * Feature: Added new custom checkout text for description.
@@ -92,6 +96,3 @@ Sorry we currently don't support subscriptions, but it's on the short list to ad
 * Initial release.
 
 == Upgrade Notice ==
-
-= 0.2.0 =
-The method for displaying text on the checkout screen has changed. After update please review the checkout settings.
