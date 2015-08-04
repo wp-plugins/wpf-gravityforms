@@ -4,7 +4,7 @@ Tags: stripe, payment, payments, credit cards, online payment, forms, gravity fo
 Donate link: https://wpfortify.com
 Requires at least: 3.9
 Tested up to: 4.2.2
-Stable tag: 0.2.1
+Stable tag: 2.2.0
 License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,10 @@ Sorry we currently don't support subscriptions, but it's on the short list to ad
 4. wpFortify default checkout page
 
 == Changelog ==
+= 2.2.0 =
+* Added notification delays.
+* Changed version number format.
+
 = 0.2.1 =
 * Added currency SEK.
 * Changed currency ASD to AUD.
